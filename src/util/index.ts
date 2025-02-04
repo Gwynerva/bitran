@@ -1,7 +1,2 @@
-import * as str from './str';
-import * as range from './range';
-
-export {
-    str,
-    range,
-};
+export * from './range';
+export * from './str';

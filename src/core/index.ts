@@ -1,46 +1,53 @@
-export { Parser } from './parse';
-export { Stringifier } from './stringify';
+import { Parser } from '@process/parse';
+import { Stringifier } from '@process/stringify';
 
-export {
-    type keyable,
+import { editor } from '@default/editor/core';
+import { editorName } from '@default/editor/shared';
+import { paragraph } from '@default/paragraph/core';
+import { paragraphName } from '@default/paragraph/shared';
+import { span } from '@default/span/core';
+import { spanName } from '@default/span/shared';
+import { text } from '@default/text/core';
+import { textName } from '@default/text/shared';
 
-    ParseFactory,
-    BlockParseFactory,
-    ObjBlockParseFactory,
-    InlinerParseFactory,
-    RegexpInlinerParseFactory,
+import type { GenericProductCore } from './product';
 
-    StrFactory,
-    ObjStrFactory,
-} from './factory';
+export interface BitranCoreConfig
+{
+    products: Record<string, GenericProductCore>;
+    // ...
+}
 
-export { DOM } from './dom';
-export { Node } from './dom/node';
-export { BitranDomError, ErrorNode } from './dom/error';
+export interface BitranCore
+{
+    products: Record<string, GenericProductCore>;
+    parser: Parser;
+    stringifier: Stringifier;
+}
 
-export {
-    GroupNode,
-    BlockGroupNode,
-    InlinerGroupNode,
-    RootNode,
-} from './dom/group';
+export const defaultProductCores = {
+    [editorName]:       editor,
+    [paragraphName]:    paragraph,
+    [spanName]:         span,
+    [textName]:         text,
+};
 
-export {
-    GroupItem,
-    assumeGroupItem,
-} from './dom/groupItem';
+export function createBitranCore(config?: Partial<BitranCoreConfig>): BitranCore
+{
+    const resolvedConfig: BitranCoreConfig = {
+        products: {
+            ...(config?.products || {}),
+            ...defaultProductCores,
+        },
+    };
 
-export {
-    ProductType,
-    Product,
-    Block,
-    Inliner,
-} from './dom/product';
+    return {
+        products:       resolvedConfig.products,
+        parser:         new Parser(resolvedConfig),
+        stringifier:    new Stringifier(resolvedConfig),
+    }
+}
 
-export {
-    type ProductMeta,
-    detachMeta,
-    parseMeta,
-    parseLineMeta,
-    stringifyMeta,
-} from './dom/meta';
+export * from './default';
+export * from './product';
+export * from './renderData';

@@ -1,5 +1,16 @@
 import YAML from 'yaml';
 
+export function normalizeText(text: string)
+{
+    if (!text)
+        return text;
+
+    // Remove Windows carriage returns
+    text = text.replace(/\r/gm, '');
+
+    return text;
+}
+
 export function textToStrBlocks(text: string)
 {
     if (!text) return [];

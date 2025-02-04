@@ -1,15 +1,19 @@
 {
-    "compilerOptions": {
+    "compilerOptions":{
         "module": "ESNext",
         "target": "ESNext",
         "moduleResolution": "Bundler",
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
-            "@components/*": ["components/*"],
-
+            "@":            ["./src/index.ts"],
+            "@default/*":   ["./src/default/*"],
+            "@dom/*":       ["./src/dom/*"],
+            "@process/*":   ["./src/process/*"],
+            "@core/*":      ["./src/core/*"],
+            "@render/*":    ["./src/render/*"],
+            "@util/*":      ["./src/util/*"],
         }
     },
-    "exclude": ["dist/**/*"]
+    "include": ["src/**/*", "vite-env.d.ts"],
 }
