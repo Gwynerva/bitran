@@ -1,5 +1,4 @@
-import { BlockParseFactory } from '@process/factory';
-import { ProductNode } from '@dom/productNode';
+import { BlockNode, type ProductNode } from '@dom/productNode';
 
 import { useProduct } from './product';
 
@@ -10,7 +9,7 @@ export async function useIcon(node: ProductNode | string)
 {
     const nodeName = typeof node === 'string' ? node : node.name;
     const { productCore, productRender } = useProduct(node);
-    const isBlock = productCore.Parser.prototype instanceof BlockParseFactory;
+    const isBlock = productCore.Node.prototype instanceof BlockNode;
 
     let svg = isBlock ? defaultBlockIcon : defaultInlinerIcon;
 

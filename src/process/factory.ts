@@ -165,12 +165,16 @@ export abstract class ObjProductStrFactory<T extends ProductType = ProductType> 
     stringifyNode(node: ProductNode<T>)
     {
         const obj = this.createObj(node.parseData);
+        return ObjProductStrFactory.strObjBlock(this.objName, obj);
+    }
 
+    static strObjBlock(objName: string, obj: keyable): string
+    {
         let strObj = YAML.stringify(obj, { indent: 4 }).trim();
-            strObj = strObj.replace(/: \|(-|\+|>)\n/gm, ': |\n'); // Hacky way to bypass all YAML weird "newlines" logic and just use "|" for multiline text
+            strObj = strObj.replace(/: \|(-|\+|>)\n/gm, ": |\n"); // Hacky way to bypass all YAML weird "newlines" logic and just use "|" for multiline text
             //strObj = strObj.replace(/ \|\n    \n/gm, ' |\n\n'); // <-- Dirty hack to fix YAML.stringify putting space symbol out of nowhere
 
-        return `@${this.objName}\n${indent(strObj)}`;
+        return `@${objName}\n${indent(strObj)}`;
     }
 }
 

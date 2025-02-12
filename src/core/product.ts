@@ -8,15 +8,15 @@ type Provide<T extends ProductType> = { provide: T['Provide']; };
 type BuildRenderData<T extends ProductType> = { buildRenderData: (args: { parseData: T['ParseData']; node: ProductNode<T>; core: ProductCore<T>; }) => Promise<T['RenderData']>; }
 
 type ProductCoreBase<T extends ProductType> = {
-    Node: new () => ProductNode<T>;
-    Parser: new () => ParseFactory<T>;
-    Stringifier: new () => GenericProductStrFactory<T>;
+  Node: new () => ProductNode<T>;
+  Parser: (new () => ParseFactory<T>) | (new () => ParseFactory<T>)[];
+  Stringifier: new () => GenericProductStrFactory<T>;
 
-    /**
-     * Where render data can be built.
-     * @default "both"
-     */
-    renderDataSide?: RenderDataSide;
+  /**
+   * Where render data can be built.
+   * @default "both"
+   */
+  renderDataSide?: RenderDataSide;
 };
 
 export type ProductCore<T extends ProductType> =

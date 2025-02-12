@@ -24,7 +24,7 @@ export function defineLanguages(languagesLoader: Record<string, () => Promise<{ 
     return result;
 }
 
-export async function createPhrase(languageCode: string, languages: Languages, context?: string)
+export async function createPhrase(languageCode?: string, languages?: Languages, context?: string)
 {
     let langData = {};
 

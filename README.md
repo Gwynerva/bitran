@@ -4,6 +4,12 @@
 
 <h1>Bitran</h1>
 
+### Fix types in factories. Hints on complex parseData are not shown!
+
+> [!WARNING]
+> Project under heavy construction! Rewrite using monorepo!
+> Split into multiple packages. Separate package `bitran-schema` for types and stuff.
+
 Bitran (**B**lock & **I**nliner **tran**spiler) is a highly customizable parser for converting any structured text into programming-friendly DOM (document object model) that consists of blocks and inliners. These blocks and inliners can later be easily analyzed or rendered into any other format: HTML, Vue, etc...
 
 **Key features:**

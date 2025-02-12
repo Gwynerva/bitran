@@ -1,62 +1,65 @@
 {
-    "name": "bitran",
-    "version": "3.0.0",
-    "description": "Highly customizable text processor and transpiler.",
-    "keywords": [
-        "parser",
-        "transpiler",
-        "string",
-        "dom",
-        "text-processor"
-    ],
-    "license": "MIT",
-    "type": "module",
-    "main": "dist/index.js",
-    "types": "dist/_types/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/index.js",
-            "types": "./dist/_types/index.d.ts"
-        },
-        "./default": {
-            "import": "./dist/default.js",
-            "types": "./dist/_types/default/index.d.ts"
-        },
-        "./dom": {
-            "import": "./dist/dom.js",
-            "types": "./dist/_types/dom/index.d.ts"
-        },
-        "./process": {
-            "import": "./dist/process.js",
-            "types": "./dist/_types/process/index.d.ts"
-        },
-        "./core": {
-            "import": "./dist/core.js",
-            "types": "./dist/_types/core/index.d.ts"
-        },
-        "./render": {
-            "import": "./dist/render.js",
-            "types": "./dist/_types/render/index.d.ts"
-        },
-        "./style.css": "./dist/bitran.css",
-        "./public/*": "./dist/public/*"
+  "name": "bitran",
+  "version": "3.0.0-dev.3",
+  "description": "📜 Highly customizable text processor and transpiler.",
+  "keywords": [
+    "parser",
+    "transpiler",
+    "string",
+    "dom",
+    "text-processor"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/_types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/_types/index.d.ts"
     },
-    "scripts": {
-        "dev": "bun vite build --watch",
-        "build": "bun vite build"
+    "./default": {
+      "import": "./dist/default.js",
+      "types": "./dist/_types/default/index.d.ts"
     },
-    "devDependencies": {
-        "@types/jest": "^29.5.14",
-        "@types/node": "^22.13.1",
-        "@vitejs/plugin-vue": "^5.2.1",
-        "sass": "^1.83.4",
-        "typescript": "^5.7.3",
-        "vite": "^6.0.11",
-        "vite-plugin-dts": "^4.5.0",
-        "vite-tsconfig-paths": "^5.1.4"
+    "./dom": {
+      "import": "./dist/dom.js",
+      "types": "./dist/_types/dom/index.d.ts"
     },
-    "peerDependencies": {
-        "vue": "^3.5.13",
-        "yaml": "^2.7.0"
-    }
+    "./process": {
+      "import": "./dist/process.js",
+      "types": "./dist/_types/process/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core.js",
+      "types": "./dist/_types/core/index.d.ts"
+    },
+    "./render": {
+      "import": "./dist/render.js",
+      "types": "./dist/_types/render/index.d.ts"
+    },
+    "./style.css": "./dist/bitran.css",
+    "./public/*": "./dist/public/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "bun vite build --watch",
+    "build": "bun vite build"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "sass": "^1.83.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11",
+    "vite-plugin-dts": "^4.5.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.13",
+    "yaml": "^2.7.0"
+  }
 }

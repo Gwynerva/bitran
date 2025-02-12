@@ -21,8 +21,11 @@ export class Parser
 {
     coreConfig: BitranCoreConfig;
 
-    private blockFactories: Record<string, new () => BlockParseFactory> = {};
-    private inlinerFactories: Record<string, new () => InlinerParseFactory> = {};
+    private blockFactories: [string, new () => BlockParseFactory][] = [];
+    private inlinerFactories: [string, new  ()  => InlinerParseFactory][] = [];
+
+    // private blockFactories: Record<string, new () => BlockParseFactory> = {};
+    // private inlinerFactories: Record<string, new () => InlinerParseFactory> = {};
 
     constructor(coreConfig: BitranCoreConfig)
     {
@@ -30,10 +33,10 @@ export class Parser
 
         for (const [productName, ProductCore] of Object.entries(coreConfig.products))
         {
-            const Factory = ProductCore.Parser;
-
-            if (Factory)
-                this[Factory.prototype instanceof BlockParseFactory ? 'blockFactories' : 'inlinerFactories'][productName] = Factory as any;
+            const factories = Array.isArray(ProductCore.Parser) ? ProductCore.Parser : [ProductCore.Parser];
+            for (const Factory of factories)
+                if (Factory)
+                    this[Factory.prototype instanceof BlockParseFactory ? 'blockFactories' : 'inlinerFactories'].push([productName, Factory as any]);
         }
     }
 
@@ -80,7 +83,7 @@ export class Parser
 
         const { meta, restText } = detachMeta(strBlock);
 
-        for (const [blockName, BlockFactory] of Object.entries(this.blockFactories))
+        for (const [blockName, BlockFactory] of this.blockFactories)
         {
             const block = new this.coreConfig.products[blockName].Node;
             block.name = blockName;
@@ -126,7 +129,7 @@ export class Parser
         let rangeFactories: Record<number, { name: string, factory: InlinerParseFactory }> = {};
         let ranges: Range[] = [];
 
-        for (const [inlinerName, InlinerFactory] of Object.entries(this.inlinerFactories))
+        for (const [inlinerName, InlinerFactory] of this.inlinerFactories)
         {
             const factory = prepareFactory(InlinerFactory, this, null, options);
             const newRanges: Range[] = factory.outlineRanges(text);
